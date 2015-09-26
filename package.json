@@ -1,15 +1,21 @@
 {
   "name": "calcified-fragments",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bluebird": "^2.10.1",
-    "lodash": "^3.10.1"
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "dotenv": "^1.2.0",
+    "express": "~4.2.0",
+    "jade": "~1.3.0",
+    "lodash": "^3.10.1",
+    "morgan": "~1.0.0",
+    "request": "^2.64.0",
+    "static-favicon": "~1.0.0"
   }
 }

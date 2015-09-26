@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  div.container
+    form(method="POST")
+      div.row
+        div.four.columns
+          label
+            | Gamertag
+          input(type="text").u-full-width(name="gamertag")
+        div.four.columns
+          label
+            | System
+          select.u-full-width(name="system")
+            option(value="1")
+              | Xbox
+            option(value="2")
+              | Playstation
+        div.four.columns
+          label
+            | &nbsp;
+          input.button-primary(type="submit" value="Get My Fragments")
+
+

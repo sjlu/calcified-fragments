@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div.container
+    table
+      thead
+        tr
+          th
+            | Card
+          th
+            | Do you have it?
+      tbody
+        - each card in cards
+          tr
+            td
+              b= card.cardName
+            td= card.have
