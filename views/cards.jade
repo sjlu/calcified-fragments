@@ -18,16 +18,18 @@ block content
           tr
             td
               if card.have
-                span(style="color: gray")= card.cardName
+                span(style="color:gray")= card.cardName
               else
-                span(style="color: #33C3F0; font-weight: bold")=card.cardName
+                span(style="color:#e67e22;font-weight:bold")=card.cardName
               | &nbsp;
               span(style="font-size:8px;color:gray")=card.cardId
             td
               if card.have
-                | Yes
+                span(style="color:gray")
+                  | Yes
               else
-                | No
+                span(style="color:#e67e22;font-weight:bold")
+                  | No
             td= card.notes
             td
               if card.ign
