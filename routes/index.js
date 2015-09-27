@@ -10,8 +10,8 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
 
   var platform = 'xbox'
-  if (req.body.system === 2) {
-    platform = 'ps'
+  if (req.body.system == 2) {
+    platform = 'psn'
   }
 
   var gamertag = req.body.gamertag
@@ -25,7 +25,7 @@ router.get('/:platform/:username', function(req, res, next) {
   var system = 0
   if (req.params.platform === "xbox") {
     system = 1
-  } else if (req.params.platform === "ps") {
+  } else if (req.params.platform === "psn") {
     system = 2
   }
 
