@@ -10,6 +10,8 @@ block content
           th
             | Do you have it?
           th
+            | Notes
+          th
             | Details
       tbody
         - each card in cards
@@ -19,7 +21,10 @@ block content
                 span(style="color: gray")= card.cardName
               else
                 b=card.cardName
+              | &nbsp;
+              span(style="font-size:8px;color:gray")=card.cardId
             td= card.have
+            td= card.notes
             td
               if card.ign
                 a(href=card.ign)
