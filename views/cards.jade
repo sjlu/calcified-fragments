@@ -10,7 +10,7 @@ block content
           th
             | Do you have it?
           th
-            | ID
+            | Details
       tbody
         - each card in cards
           tr
@@ -20,4 +20,7 @@ block content
               else
                 b=card.cardName
             td= card.have
-            td= card.cardId
+            td
+              if card.ign
+                a(href=card.ign)
+                  | Details
