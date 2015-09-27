@@ -13,5 +13,8 @@ block content
         - each card in cards
           tr
             td
-              b= card.cardName
+              if card.have
+                span(style="color: gray")= card.cardName
+              else
+                b=card.cardName
             td= card.have
