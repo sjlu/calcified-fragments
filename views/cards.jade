@@ -8,7 +8,7 @@ block content
           th
             | Card
           th
-            | Do you have it?
+            | Have it?
           th
             | Notes
           th
@@ -23,7 +23,11 @@ block content
                 b=card.cardName
               | &nbsp;
               span(style="font-size:8px;color:gray")=card.cardId
-            td= card.have
+            td
+              if card.have
+                | Yes
+              else
+                | No
             td= card.notes
             td
               if card.ign
