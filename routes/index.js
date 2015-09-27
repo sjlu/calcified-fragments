@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fragmentLookup = require('../lib/fragment_lookup');
+var _ = require('lodash')
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -31,7 +32,12 @@ router.get('/:platform/:username', function(req, res, next) {
 
   fragmentLookup(system, req.params.username)
     .then(function(cards) {
-      res.render('cards', {cards:cards})
+
+      var completed = _.filter(cards, function(card) {
+        return card.have
+      })
+
+      res.render('cards', {cards:cards,done:completed.length})
     })
     .catch(next)
 
