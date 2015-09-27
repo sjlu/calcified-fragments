@@ -16,6 +16,8 @@ block content
             | Notes
           th
             | Details
+          th
+            | Video
       tbody
         - each card in cards
           tr
@@ -36,5 +38,9 @@ block content
             td= card.notes
             td
               if card.ign
-                a(href=card.ign)
+                a(href=card.ign target="_new")
                   | Details
+            td
+              if card.video
+                a(href=card.video target="_new")
+                  | Video
