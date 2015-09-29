@@ -28,7 +28,7 @@ app.use(morgan({
     }
 
     return '\x1b[90m'
-      + tokens['remote-addr'](req)
+      + req.get('X-Forwarded-For')
       + ' ' + req.method
       + ' ' + req.get('host')+(req.originalUrl || req.url)
       + ' '
