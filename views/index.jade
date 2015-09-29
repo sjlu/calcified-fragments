@@ -34,3 +34,13 @@ block content
           label
             | &nbsp;
           input.button-primary(type="submit" value="Get My " + type)
+  div.container
+    p(style="max-width:500px")
+      if type === "fragments"
+        //- | Looking for dead ghosts?&nbsp;
+        //- a(href="http://destinydeadghosts.com")
+        //-   | destinydeadghosts.com
+      else if type === "ghosts"
+        | Looking for calcified fragments?&nbsp;
+        a(href="http://destinydeadghosts.com")
+          | destinycalcifiedfragments.com
