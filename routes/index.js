@@ -5,7 +5,37 @@ var ghostLookup = require('../lib/ghost_lookup')
 var _ = require('lodash')
 var errors = require('../errors')
 
-/* GET home page. */
+router.use(function(req, res, next) {
+
+  var host = req.get('host');
+  var type = req.query.type;
+
+  if (type) {
+    if (type === 'ghosts') {
+      res.locals.type = 'ghosts'
+    } else if (type === 'fragments') {
+      res.locals.type = 'fragments'
+    } else {
+      next(new errors.NotFound("Unrecognized type, must be 'ghosts' or 'fragments'"))
+    }
+  } else if (host.indexOf("destinydeadghosts.com") > -1) {
+    res.locals.type = 'ghosts'
+  } else if (host.indexOf("destinycalcifiedfragments.com") > -1) {
+    res.locals.type = 'fragments'
+  } else {
+    res.locals.type = 'fragments'
+  }
+
+  if (res.locals.type === 'ghosts') {
+    res.locals.title = 'Dead Ghosts'
+  } else if (res.locals.type === 'fragments') {
+    res.locals.title = 'Calcified Fragments'
+  }
+
+  return next()
+
+})
+
 router.get('/', function(req, res) {
   res.render('index');
 });
@@ -19,7 +49,12 @@ router.post('/', function(req, res) {
 
   var gamertag = req.body.gamertag
 
-  res.redirect('/' + platform + '/' + gamertag)
+  var url = '/' + platform + '/' + gamertag
+  if (req.query.type) {
+    url += '?type=' + req.query.type
+  }
+
+  res.redirect(url)
 
 })
 
@@ -46,14 +81,12 @@ var renderFragments = function(req, res, next) {
 }
 
 var renderGhosts = function(req, res, next) {
-
   ghostLookup(req.params.system, req.params.username)
     .then(function(sections) {
       res.render('display', {
         sections: sections
       })
     })
-
 }
 
 router.get('/:platform/:username', function(req, res, next) {
@@ -68,18 +101,12 @@ router.get('/:platform/:username', function(req, res, next) {
   var host = req.get('host');
   var type = req.query.type;
 
-  if (type) {
-    if (type === 'ghosts') {
-      renderGhosts(req, res, next)
-    } else if (type === 'fragments') {
-      renderFragments(req, res, next)
-    } else {
-      next(new errors.NotFound("Unrecognized type, must be 'ghosts' or 'fragments'"))
-    }
-  } else if (host.indexOf("destinydeadghosts.com") > -1) {
+  if (res.locals.type === 'ghosts') {
     renderGhosts(req, res, next)
-  } else {
+  } else if (res.locals.type === 'fragments') {
     renderFragments(req, res, next)
+  } else {
+    next(new errors.NotFound())
   }
 })
 

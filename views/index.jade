@@ -2,15 +2,19 @@ extends layout
 
 block content
   div.container
-    h3
-      | Destiny Calcified Fragments
+    h3="Destiny " + title
     p(style="max-width:500px")
-      | A tool that lets you know which calcified fragments you have and how to get them.
-      | There are 50 fragments in total where 45 of them are required to obtain an exotic
-      | weapon called the&nbsp;
-      a(href="http://planetdestiny.com/touch-of-malice-quest-guide/" target="_new")
-        | Touch of Malice
-      |. This tool is based off your Grimoire cards and cannot differentiate between characters.
+      if type === "fragments"
+        | A tool that lets you know which calcified fragments you have and how to get them.
+        | There are 50 fragments in total where 45 of them are required to obtain an exotic
+        | weapon called the&nbsp;
+        a(href="http://planetdestiny.com/touch-of-malice-quest-guide/" target="_new")
+          | Touch of Malice
+        |. This tool is based off your Grimoire cards and cannot differentiate between characters.
+      else if type === "ghosts"
+        | Dead Ghosts are in-game collectables that are found throughout the game. This tool helps
+        | you figure out which ones you have and which ones you don't and provides guides to
+        | help you find them.
   div.container
     form(method="POST")
       div.row
@@ -29,4 +33,4 @@ block content
         div.four.columns
           label
             | &nbsp;
-          input.button-primary(type="submit" value="Get My Fragments")
+          input.button-primary(type="submit" value="Get My " + type)
