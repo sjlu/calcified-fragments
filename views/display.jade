@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  div.container
+    if done && total
+      h1=done + "/" + total
+
+    - each section in sections
+      h4=section.name
+      table
+        thead
+          tr
+            th
+              | Card
+            th
+              | Have it?
+            th
+              | Notes
+            th
+              | Details
+            th
+              | Video
+        tbody
+          - each card in section.cards
+            tr
+              td
+                if card.have
+                  span(style="color:gray")= card.cardName
+                else
+                  span(style="color:#e67e22;font-weight:bold")=card.cardName
+                | &nbsp;
+                span(style="font-size:8px;color:gray")=card.cardId
+              td
+                if card.have
+                  span(style="color:gray")
+                    | Yes
+                else
+                  span(style="color:#e67e22;font-weight:bold")
+                    | No
+              td= card.notes
+              td
+                if card.ign
+                  a(href=card.ign target="_new")
+                    | Details
+              td
+                if card.video
+                  a(href=card.video target="_new")
+                    | Video
