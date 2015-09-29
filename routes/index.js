@@ -74,7 +74,8 @@ var renderFragments = function(req, res, next) {
       res.render('display', {
         sections:sections,
         done:completed.length,
-        total:cards.length
+        total:cards.length,
+        showDetails:true
       })
     })
     .catch(next)

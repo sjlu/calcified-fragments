@@ -16,8 +16,9 @@ block content
               | Have it?
             th
               | Notes
-            th
-              | Details
+            if showDetails
+              th
+                | Details
             th
               | Video
         tbody
@@ -38,10 +39,11 @@ block content
                   span(style="color:#e67e22;font-weight:bold")
                     | No
               td= card.notes
-              td
-                if card.ign
-                  a(href=card.ign target="_new")
-                    | Details
+              if showDetails
+                td
+                  if card.ign
+                    a(href=card.ign target="_new")
+                      | Details
               td
                 if card.video
                   a(href=card.video target="_new")
