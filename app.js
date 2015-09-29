@@ -29,7 +29,7 @@ app.use(morgan({
 
     return '\x1b[90m'
       + req.method
-      + ' ' + res.locals.type || ""
+      + ' ' + (res.locals.type || '')
       + ' ' + (req.originalUrl || req.url)
       + ' '
       + '\x1b[' + statusColor + 'm' + res.statusCode
