@@ -98,9 +98,6 @@ router.get('/:platform/:username', function(req, res, next) {
   }
   req.params.system = system
 
-  var host = req.get('host');
-  var type = req.query.type;
-
   if (res.locals.type === 'ghosts') {
     renderGhosts(req, res, next)
   } else if (res.locals.type === 'fragments') {
