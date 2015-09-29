@@ -28,8 +28,7 @@ app.use(morgan({
     }
 
     return '\x1b[90m'
-      + req.get('X-Forwarded-For')
-      + ' ' + req.method
+      + req.method
       + ' ' + req.get('host')+(req.originalUrl || req.url)
       + ' '
       + '\x1b[' + statusColor + 'm' + res.statusCode
