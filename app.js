@@ -29,7 +29,8 @@ app.use(morgan({
 
     return '\x1b[90m'
       + req.method
-      + ' ' + req.get('host')+(req.originalUrl || req.url)
+      + ' ' + req.get('host')
+      + ' ' + (req.originalUrl || req.url)
       + ' '
       + '\x1b[' + statusColor + 'm' + res.statusCode
       + ' \x1b[' + timeColor + 'm'
