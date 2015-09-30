@@ -31,6 +31,9 @@ block content
                   span(style="color:#e67e22;font-weight:bold")=card.cardName
                 | &nbsp;
                 span(style="font-size:8px;color:gray")=card.cardId
+                | &nbsp;
+                if card.expansion
+                  span(style="font-size:8px;color:#8e44ad;text-transform:uppercase;font-weight:bold;")=card.expansion
               td
                 if card.have
                   span(style="color:gray")
