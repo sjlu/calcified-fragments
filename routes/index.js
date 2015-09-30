@@ -88,6 +88,7 @@ var renderGhosts = function(req, res, next) {
         sections: sections
       })
     })
+    .catch(next)
 }
 
 router.get('/:platform/:username', function(req, res, next) {
