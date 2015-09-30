@@ -1,6 +1,9 @@
 var _ = require('lodash');
 var dotenv = require('dotenv');
 
+// run in silent mode
+dotenv.config({silent:true})
+
 // load dotenv config vars if available
 dotenv.load();
 

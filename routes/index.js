@@ -99,6 +99,9 @@ router.get('/:platform/:username', function(req, res, next) {
   }
   req.params.system = system
 
+  res.locals.platform = req.params.platform
+  res.locals.username = req.params.username
+
   if (res.locals.type === 'ghosts') {
     renderGhosts(req, res, next)
   } else if (res.locals.type === 'fragments') {

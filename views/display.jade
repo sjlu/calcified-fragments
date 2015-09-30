@@ -2,24 +2,33 @@ extends layout
 
 block content
   div.container
+    p
+      span=username
+      | &nbsp;&middot;&nbsp;
+      a(href="http://destinycalcifiedfragments.com/"+platform+"/"+username)
+        | Fragments
+      | &nbsp;&middot;&nbsp;
+      a(href="http://destinydeadghosts.com/"+platform+"/"+username)
+        | Ghosts
+
     if done && total
       h1=done + "/" + total
 
     - each section in sections
       h3(style="margin-bottom:0")=section.name
-      table
+      table(width="100%")
         thead
           tr
-            th
+            th(width="30%")
               | Card
-            th
+            th(width="10%")
               | Have it?
             th
               | Notes
             if showDetails
               th
                 | Details
-            th
+            th(width="10%")
               | Video
         tbody
           - each card in section.cards
