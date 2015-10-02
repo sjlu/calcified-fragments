@@ -28,7 +28,7 @@ app.use(morgan({
     }
 
     return '\x1b[90m'
-      + "C" + (process.env.pm_id || '')
+      + "\C" + (process.env.pm_id || '')
       + ' ' + req.method
       + ' ' + (res.locals.type || '')
       + ' ' + (req.originalUrl || req.url)
