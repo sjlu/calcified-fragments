@@ -37,7 +37,6 @@ pm2.connect(function() {
 });
 
 process.on('SIGINT', function() {
-  console.log('got here');
   pm2.killDaemon(function() {
     process.exit(0)
   })
