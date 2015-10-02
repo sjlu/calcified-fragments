@@ -1,15 +1,44 @@
 #!/usr/bin/env node
-var app = require('../app');
-app.set('port', process.env.PORT || 3000);
+var pm2 = require('pm2');
 
-// warm up the cache
-// then run the web app
-var bungieLookup = require('../lib/bungie_lookup');
-bungieLookup.getCardDetails()
-  .then(function() {
-    app.listen(app.get('port'));
-  })
-  .catch(function(err) {
-    console.error(err.stack || err)
-  })
+var instances = process.env.WEB_CONCURRENCY || -1;
+var maxMemory = process.env.WEB_MEMORY || 512;
+var dynoName = process.env.DYNO || "dev";
 
+console.log('DYNO: %s', dynoName)
+console.log('WEB_CONCURRENCY: %s', instances)
+console.log('WEB_MEMORY: %s', maxMemory)
+
+pm2.connect(function() {
+  pm2.start({
+    script    : 'app.js',
+    name      : 'web',
+    exec_mode : 'cluster',
+    instances : instances,
+    max_memory_restart : maxMemory + 'M'
+  }, function(err) {
+    if (err) {
+      return console.error(err.stack || err);
+    }
+
+    pm2.launchBus(function(err, bus) {
+      if (err) {
+        return console.error(err.stack || err);
+      }
+
+      bus.on('log:out', function(packet) {
+        console.log(packet.data);
+      });
+      bus.on('log:err', function(packet) {
+        console.error(packet.data);
+      });
+    });
+  });
+});
+
+process.on('SIGINT', function() {
+  console.log('got here');
+  pm2.killDaemon(function() {
+    process.exit(0)
+  })
+})

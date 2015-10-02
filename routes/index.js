@@ -3,7 +3,7 @@ var router = express.Router();
 var fragmentLookup = require('../lib/fragment_lookup');
 var ghostLookup = require('../lib/ghost_lookup')
 var _ = require('lodash')
-var errors = require('../errors')
+var errors = require('../lib/errors')
 
 router.use(function(req, res, next) {
 
