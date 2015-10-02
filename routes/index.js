@@ -7,25 +7,6 @@ var errors = require('../errors')
 
 router.use(function(req, res, next) {
 
-  var host = req.get('host');
-  var type = req.query.type;
-
-  if (type) {
-    if (type === 'ghosts') {
-      res.locals.type = 'ghosts'
-    } else if (type === 'fragments') {
-      res.locals.type = 'fragments'
-    } else {
-      next(new errors.NotFound("Unrecognized type, must be 'ghosts' or 'fragments'"))
-    }
-  } else if (host.indexOf("destinydeadghosts.com") > -1) {
-    res.locals.type = 'ghosts'
-  } else if (host.indexOf("destinycalcifiedfragments.com") > -1) {
-    res.locals.type = 'fragments'
-  } else {
-    res.locals.type = 'fragments'
-  }
-
   if (res.locals.type === 'ghosts') {
     res.locals.title = 'Dead Ghosts'
   } else if (res.locals.type === 'fragments') {
