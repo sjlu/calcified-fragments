@@ -64,8 +64,10 @@ app.use(function(req, res, next) {
     res.locals.type = 'ghosts'
   } else if (host.indexOf("destinycalcifiedfragments.com") > -1) {
     res.locals.type = 'fragments'
-  } else {
+  } else if (host.indexOf("calcified-fragments.herokuapp.com") > -1) {
     return res.redirect('http://destinycalcifiedfragments.com' + req.originalUrl)
+  } else { // localhost
+    res.locals.type = 'fragments'
   }
 
   return next()
