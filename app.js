@@ -65,7 +65,7 @@ app.use(function(req, res, next) {
   } else if (host.indexOf("destinycalcifiedfragments.com") > -1) {
     res.locals.type = 'fragments'
   } else {
-    res.locals.type = 'fragments'
+    return res.redirect('http://destinycalcifiedfragments.com' + req.originalUrl)
   }
 
   return next()
