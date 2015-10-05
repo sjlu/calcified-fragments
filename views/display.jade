@@ -19,16 +19,21 @@ block content
       table(width="100%")
         thead
           tr
-            th(width="30%")
-              | Card
+            th(width="35%")
+              if type == 'ghosts'
+                | Ghost
+              else if type == 'fragments'
+                | Fragments
+              else
+                | Card
             th(width="10%")
               | Have it?
             th
               | Notes
             if showDetails
-              th(width="10%")
+              th(width="5%")
                 | Details
-            th(width="10%")
+            th(width="5%")
               | Video
         tbody
           - each card in section.cards
