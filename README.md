@@ -30,3 +30,4 @@ Make sure you have your own `.env` file with the appropriate `BUNGIE_API_KEY`
 ## License
 
 MIT
+
