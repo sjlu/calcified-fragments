@@ -105,17 +105,4 @@ app.use(function(err, req, res, next) {
 	});
 });
 
-app.set('port', process.env.PORT || 3000);
-
-// warm up the cache
-// then run the web app
-var bungieLookup = require('./lib/bungie_lookup');
-bungieLookup.getCardDetails()
-  .then(function() {
-    app.listen(app.get('port'));
-  })
-  .catch(function(err) {
-    console.error(err.stack || err)
-  })
-
 module.exports = app;
