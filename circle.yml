@@ -19,7 +19,7 @@ deployment:
   prod:
     branch: master
     commands:
-      - $GCE_KEY | base64 --decode > gcloud.json
+      - echo $GCE_KEY | base64 --decode > gcloud.json
       - gcloud auth activate-service-account $GCE_EMAIL --key-file gcloud.json
       - ssh-keygen -f ~/.ssh/google_compute_engine -N ""
       - gcloud docker push $GCE_URL > /dev/null
