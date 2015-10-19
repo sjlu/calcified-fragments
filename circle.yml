@@ -6,7 +6,8 @@ dependencies:
   cache_directories:
     - ~/kubernetes
   override:
-    - ./ensure-kubernetes-installed.sh
+    - pip install pyopenssl
+    - if [ ! -d ~/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash; ~/google-cloud-sdk/bin/gcloud components update preview; fi
     - docker build -t $GCE_URL:$CIRCLE_SHA1 .
 
 deployment:
