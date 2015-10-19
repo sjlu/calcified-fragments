@@ -18,11 +18,6 @@ dependencies:
     - docker build -t $GCE_URL:$CIRCLE_SHA1 .
     - mkdir -p ~/docker; docker save $GCE_URL:$CIRCLE_SHA1 > ~/docker/image.tar
 
-test:
-  override:
-    - docker run -d -p 8080:8080 $GCE_URL:$CIRCLE_SHA1
-    - curl --retry 10 --retry-delay 5 -v http://localhost:8080
-
 deployment:
   prod:
     branch: master
