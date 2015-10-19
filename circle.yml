@@ -9,17 +9,25 @@ machine:
 
 dependencies:
   cache_directories:
-    - ~/kubernetes
+    - ~/google-cloud-sdk
+    - ~/docker
   override:
     - pip install pyopenssl
     - if [ ! -d ~/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash; ~/google-cloud-sdk/bin/gcloud components update preview; fi
+    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
     - docker build -t $GCE_URL:$CIRCLE_SHA1 .
+    - mkdir -p ~/docker; docker save $GCE_URL:$CIRCLE_SHA1 > ~/docker/image.tar
+
+test:
+  override:
+    - docker run -d -p 8080:8080 -e $GCE_URL:$CIRCLE_SHA1
+    - curl --retry 10 --retry-delay 5 -v http://localhost:8080
 
 deployment:
   prod:
     branch: master
     commands:
-      - echo $GCE_KEY | base64 --decode > gcloud.json
-      - gcloud auth activate-service-account $GCE_EMAIL --key-file gcloud.json
+      - echo $GCE_KEY | base64 --decode > gcloud.p12
+      - gcloud auth activate-service-account $GCE_EMAIL --key-file gcloud.p12
       - ssh-keygen -f ~/.ssh/google_compute_engine -N ""
       - gcloud docker push $GCE_URL > /dev/null
