@@ -37,6 +37,7 @@ ADD . ./
 RUN npm install
 
 # Lets start the application
-EXPOSE 3000
+EXPOSE 8080
+ENV PORT 8080
 ENV NODE_ENV production
 CMD npm start
