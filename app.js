@@ -13,37 +13,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon());
-app.use(morgan({
-  format: function(tokens, req, res){
-    var status = res.statusCode;
-    var statusColor = 32;
-    var time = (new Date - req._startTime);
-    var timeColor = 32;
+app.use(morgan('dev'));
 
-    if (status >= 500) statusColor = 31
-    else if (status >= 400) statusColor = 33
-    else if (status >= 300) statusColor = 36;
-
-    if (time >= 1000) {
-      timeColor = 31
-    }
-
-    return '\x1b[90m'
-      + "\C" + (process.env.pm_id || '')
-      + ' ' + req.method
-      + ' ' + (res.locals.type || '')
-      + ' ' + (req.originalUrl || req.url)
-      + ' '
-      + '\x1b[' + statusColor + 'm' + res.statusCode
-      + ' \x1b[' + timeColor + 'm'
-      + time
-      + 'ms'
-      + '\x1b[0m';
-  }
+app.use(bodyParser.json({
+  extended: true
 }));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
