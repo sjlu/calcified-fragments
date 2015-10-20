@@ -1,0 +1,8 @@
+{
+  "apps": [{
+    "name": "www",
+    "script": "bin/www",
+    "exec_mode": "cluster",
+    "instances": -1
+  }]
+}
