@@ -10,12 +10,12 @@ It's based off grimoire cards. So if you've gotten the fragment, you'll also hav
 the grimoire card. Unfortunately if you did this on multiple characters, it does
 not differentiate between them.
 
-## Production notes
+## Production Notes
 
 Nothing too special, ran on Heroku. Needs a `BUNGIE_API_KEY` in its environment
 variables which can be obtained at https://www.bungie.net/en/User/API
 
-## Dev
+## Development
 
 I hope you have some installation of Node.js
 
