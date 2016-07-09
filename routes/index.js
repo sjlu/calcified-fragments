@@ -21,10 +21,6 @@ router.get('/', function(req, res) {
   res.render('index');
 });
 
-router.get('/faq', function(req, res) {
-  res.render('faq');
-})
-
 router.post('/', function(req, res) {
 
   var platform = 'xbox'

@@ -50,8 +50,12 @@ block content
                   span(style="font-size:8px;color:gray;text-transform:uppercase;")=card.expansion
               td(style="min-width: 72px")
                 if card.have
-                  for character in card.characters
-                    img(style="width: 24px" src="http://www.bungie.net" + character.emblem_url)
+                  if card.characters
+                    for character in card.characters
+                      img(style="width: 24px" src="http://www.bungie.net" + character.emblem_url)
+                  else
+                  span(style="color: grey")
+                    | Yes
                 else
                   span(style="color:#e67e22;font-weight:bold")
                     | No
