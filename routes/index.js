@@ -12,7 +12,7 @@ router.use(function (req, res, next) {
   } else if (res.locals.type === 'fragments') {
     res.locals.title = 'Calcified Fragments'
   } else if (res.locals.type === 'siva') {
-    res.locals.title = 'Dormant Siva Clusters'
+    res.locals.title = 'SIVA Clusters'
   }
 
   return next()
