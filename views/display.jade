@@ -14,8 +14,17 @@ block content
       a(href="http://destinysivaclusters.com/"+platform+"/"+username)
         | SIVA Clusters
 
+    if type == 'siva'
+      p(style="max-width: 480px")
+       | Still working on finding all of the SIVA Clusters. Help me find clusters 
+       | live on my Twitch stream.&nbsp;
+       a(href="https://www.twitch.tv/sluzorz")
+         | twitch.tv/sluzorz
+
     if done && total
       h3=done + "/" + total
+
+
 
     - each section in sections
       h3(style="margin-bottom:0")=section.name
