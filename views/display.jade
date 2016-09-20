@@ -16,15 +16,13 @@ block content
 
     if type == 'siva'
       p(style="max-width: 480px")
-       | Still working on finding all of the SIVA Clusters. Help me find clusters 
-       | live on my Twitch stream.&nbsp;
-       a(href="https://www.twitch.tv/sluzorz")
-         | twitch.tv/sluzorz
+       | Still working on finding all of the SIVA Clusters. Help me find them
+       | by visiting the&nbsp;
+       a(href="https://www.reddit.com/r/DestinyTheGame/comments/53myl4/siva_clusters_megathread/")
+         | megathread on reddit
 
     if done && total
       h3=done + "/" + total
-
-
 
     - each section in sections
       h3(style="margin-bottom:0")=section.name
