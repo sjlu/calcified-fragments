@@ -23,6 +23,7 @@
     "morgan": "~1.6.1",
     "pm2": "^0.15.7",
     "request": "^2.64.0",
-    "static-favicon": "~1.0.0"
+    "static-favicon": "~1.0.0",
+    "winston": "^2.2.0"
   }
 }
