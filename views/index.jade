@@ -42,11 +42,17 @@ block content
           input.button-primary(type="submit" value="Get My " + type)
   div.container
     p(style="max-width:500px")
-      if type === "fragments"
+      if type != "ghosts"
         | Looking for dead ghosts?&nbsp;
         a(href="http://destinydeadghosts.com")
           | destinydeadghosts.com
-      else if type === "ghosts"
+        br
+      if type === "fragments"
         | Looking for calcified fragments?&nbsp;
         a(href="http://destinycalcifiedfragments.com")
           | destinycalcifiedfragments.com
+        br
+      if type === "siva"
+        | Looking for siva clusters?&nbsp;
+        a(href="http://destinysivaclusters.com")
+          | destinysivaclusters.com
