@@ -75,7 +75,10 @@ var renderGhosts = function (req, res, next) {
 var renderSiva = function (req, res, next) {
   sivaLookup(req.params.system, req.params.username)
     .then(function (sections) {
-      var cards = _.values(sections)
+      var cards = _.chain(sections)
+        .map('cards')
+        .flatten()
+        .value()
 
       var completed = _.filter(cards, function(card) {
         return card.have
