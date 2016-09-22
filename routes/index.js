@@ -54,7 +54,8 @@ var renderFragments = function (req, res, next) {
         sections: sections,
         done: completed.length,
         total: cards.length,
-        showDetails: true
+        showDetails: true,
+        showNotes: true
       })
     })
     .catch(next)
@@ -64,7 +65,8 @@ var renderGhosts = function (req, res, next) {
   ghostLookup(req.params.system, req.params.username)
     .then(function (sections) {
       res.render('display', {
-        sections: sections
+        sections: sections,
+        showNotes: true
       })
     })
     .catch(next)
@@ -72,15 +74,12 @@ var renderGhosts = function (req, res, next) {
 
 var renderSiva = function (req, res, next) {
   sivaLookup(req.params.system, req.params.username)
-    .then(function (cards) {
+    .then(function (sections) {
+      var cards = _.values(sections)
+
       var completed = _.filter(cards, function(card) {
         return card.have
       })
-
-      // format it to the display we require
-      var sections = [{
-        cards: cards
-      }]
 
       res.render('display', {
         sections: sections,
