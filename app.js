@@ -17,8 +17,7 @@ app.set('view engine', 'jade');
 app.use(favicon());
 app.use(morgan('dev'));
 app.use(perf(express, {
-  apiKey: config.PERF_API_KEY,
-  debug: true
+  apiKey: config.PERF_API_KEY
 }))
 
 app.use(bodyParser.json({
