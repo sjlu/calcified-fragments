@@ -22,13 +22,26 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
-router.post('/', function (req, res) {
+router.post('/', function (req, res, next) {
   var platform = 'xbox'
   if (req.body.system == 2) {
     platform = 'psn'
   }
 
   var gamertag = req.body.gamertag
+  gamertag = gamertag.trim()
+
+  if (platform === 'xbox') {
+    if (!gamertag.match(/^[A-Za-z][A-Za-z0-9\s]*$/)) {
+      next(new errors.RecoverableError('Not a valid Xbox gamertag'))
+      return
+    }
+  } else if (platform === 'psn') {
+    if (!gamertag.match(/^[A-Za-z][A-Za-z0-9_-]*$/)) {
+      next(new errors.RecoverableError('Not a valid PSN gamertag'))
+      return
+    }
+  }
 
   var url = '/' + platform + '/' + gamertag
   if (req.query.type) {
