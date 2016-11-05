@@ -22,6 +22,22 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
+var validateGamertag = function (gamertag, platform) {
+  gamertag = gamertag.trim()
+
+  if (platform === 'xbox') {
+    if (!gamertag.match(/^[A-Za-z][A-Za-z0-9\s]*$/)) {
+      return false
+    }
+  } else if (platform === 'psn') {
+    if (!gamertag.match(/^[A-Za-z][A-Za-z0-9_-]*$/)) {
+      return false
+    }
+  }
+
+  return gamertag
+}
+
 router.post('/', function (req, res, next) {
   var platform = 'xbox'
   if (req.body.system == 2) {
@@ -29,18 +45,10 @@ router.post('/', function (req, res, next) {
   }
 
   var gamertag = req.body.gamertag
-  gamertag = gamertag.trim()
-
-  if (platform === 'xbox') {
-    if (!gamertag.match(/^[A-Za-z][A-Za-z0-9\s]*$/)) {
-      next(new errors.RecoverableError('Not a valid Xbox gamertag'))
-      return
-    }
-  } else if (platform === 'psn') {
-    if (!gamertag.match(/^[A-Za-z][A-Za-z0-9_-]*$/)) {
-      next(new errors.RecoverableError('Not a valid PSN gamertag'))
-      return
-    }
+  gamertag = validateGamertag(gamertag, platform)
+  if (!gamertag) {
+    next(new errors.RecoverableError('Not a valid Xbox gamertag'))
+    return
   }
 
   var url = '/' + platform + '/' + gamertag
@@ -115,8 +123,15 @@ router.get('/:platform/:username', function (req, res, next) {
   }
   req.params.system = system
 
+  var gamertag = req.params.username
+  gamertag = validateGamertag(gamertag, req.params.platform)
+  if (!gamertag) {
+    next(new errors.RecoverableError('Not a valid Xbox gamertag'))
+    return
+  }
+
   res.locals.platform = req.params.platform
-  res.locals.username = req.params.username
+  res.locals.username = gamertag
 
   if (res.locals.type === 'ghosts') {
     renderGhosts(req, res, next)
