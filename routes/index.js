@@ -23,7 +23,15 @@ router.get('/', function (req, res) {
 })
 
 var validateGamertag = function (gamertag, platform) {
+  if (!gamertag) {
+    return false
+  }
+
   gamertag = gamertag.trim()
+
+  if (!gamertag.length) {
+    return false
+  }
 
   if (platform === 'xbox') {
     if (!gamertag.match(/^[A-Za-z][A-Za-z0-9\s]*$/)) {
