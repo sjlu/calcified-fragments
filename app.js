@@ -5,7 +5,6 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var errors = require('./lib/errors');
-var perf = require('express-perf');
 var config = require('./config');
 
 var app = express();
@@ -16,9 +15,6 @@ app.set('view engine', 'jade');
 
 app.use(favicon());
 app.use(morgan('dev'));
-app.use(perf(express, {
-  apiKey: config.PERF_API_KEY
-}))
 
 app.use(bodyParser.json({
   extended: true
